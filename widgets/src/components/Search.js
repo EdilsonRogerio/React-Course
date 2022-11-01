@@ -5,6 +5,17 @@ const Search = () => {
 
     const [results, setResult] = useState([]);
     const [term, setTerm] = useState('programming');
+    const [debouncedTerm, setDebouncedTerm] = useState(term);
+
+    useEffect(() => {
+        const timerId = setTimeout(() => {
+            setDebouncedTerm(term);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [term]);
 
     useEffect(() => {
         const search = async () => {
@@ -14,29 +25,21 @@ const Search = () => {
                     list: 'search',
                     origin: '*',
                     format: 'json',
-                    srsearch: term,
+                    srsearch: debouncedTerm,
                 },
             });
             setResult(data.query.search);
         };
-        
-        const timeoutId = setTimeout(() => {
-            if (term) {
-                search();
-            }
-        }, 1000);
-        
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [term]);
+        search();
+    }, [debouncedTerm]);
+
 
     const renderedResults = results.map((result) => {
         return (
             <div key={result.pageid} className="item">
                 <div className="right floated content" >
-                    <a 
-                        href={`https://en.wikipedia.org?curid=${result.pageid}`} 
+                    <a
+                        href={`https://en.wikipedia.org?curid=${result.pageid}`}
                         className="ui button"
                     >
                         Go
