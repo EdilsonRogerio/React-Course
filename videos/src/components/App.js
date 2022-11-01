@@ -8,7 +8,7 @@ class App extends React.Component {
 
     state = {
         videos: [],
-        selectedVideo: null
+        selectedVideo: null,
     }
 
     componentDidMount () {
