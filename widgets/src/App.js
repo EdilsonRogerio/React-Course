@@ -18,10 +18,25 @@ const items = [
     },
 ];
 
+const options = [
+    {
+        label: 'Red',
+        value: 'red',
+    },
+    {
+        label: 'Green',
+        value: 'green',
+    },
+    {
+        label: 'Blue',
+        value: 'blue',
+    }
+];
+
 export default () => {
     return (
         <div className='container'>
-            <Dropdown />
+            <Dropdown options={options} />
         </div>
     );
 }
