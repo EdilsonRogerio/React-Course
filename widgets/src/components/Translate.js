@@ -14,6 +14,10 @@ const options = [
         value: 'ar',
     },
     {
+        label: 'Portuguese',
+        value: 'pt',
+    },
+    {
         label: 'Hindi',
         value: 'hi',
     },
