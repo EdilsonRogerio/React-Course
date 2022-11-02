@@ -4,7 +4,6 @@ import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
 
-
 const items = [
     {
         title: 'What is React?',
@@ -32,14 +31,41 @@ const options = [
     {
         label: 'Blue',
         value: 'blue',
-    }
+    },
 ];
+
+const ShowAccordion = () => {
+    if (window.location.pathname === '/') {
+        return <Accordion items={items} />;
+    }
+}
+
+const ShowList = () => {
+    if (window.location.pathname === '/list') {
+        return <Search />;
+    }
+}
+
+const ShowDropdown = () => {
+    if (window.location.pathname === '/dropdown') {
+        return <Dropdown options={options} />;
+    }
+}
+
+const ShowTranslate = () => {
+    if (window.location.pathname === '/translate') {
+        return <Translate />;
+    }
+}
 
 export default () => {
 
     return (
         <div>
-            <Translate />
+            {ShowAccordion()}
+            {ShowList()}
+            {ShowDropdown()}
+            {ShowTranslate()}
         </div>
     );
 }
