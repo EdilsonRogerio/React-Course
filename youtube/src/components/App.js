@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
-import Youtube from "../apis/Youtube";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
+import useVideos from "../hooks/useVideos";
 
 const App = () => {
-    
-    const [videos, setVideos] = useState([]);
+
     const [selectedVideo, setSelectedVideo] = useState(null);
 
+    const [videos, search] = useVideos("Rick and Morty");
+
     useEffect(() => {
-        onInputSubmit("Ricky and morty");
-    }, []);
-
-    const onInputSubmit = async input => {
-        const response = await Youtube.get("/search", {
-            params: {
-                q: input,
-            }
-        });
-
-        setVideos(response.data.items);
-        setSelectedVideo(response.data.items[0]);
-    };
+        setSelectedVideo(videos[0]);
+    }, [videos]);
 
     return (
         <div className="ui container">
             <SearchBar
-                onFormSubmit={onInputSubmit}
+                onFormSubmit={search}
             />
             <div className="ui grid">
                 <div className="ui row">
@@ -43,7 +33,6 @@ const App = () => {
                         />
                     </div>
                 </div>
-
             </div>
         </div>
     );
