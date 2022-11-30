@@ -157,7 +157,7 @@
 
     .home__img {
         order: initial;
-        justify-self: initial;
+        justify-self: center;
     }
 
     .home__data {
